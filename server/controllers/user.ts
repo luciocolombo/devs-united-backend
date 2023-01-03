@@ -1,6 +1,6 @@
 const userModel = require("../models/user");
-const argon2 = require("argon2");
 const jwt = require("jsonwebtoken");
+const argon2 = require("argon2");
 
 module.exports = {
    create: async function createUser(req, res) {
