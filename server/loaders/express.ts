@@ -1,12 +1,14 @@
-const express = require("express");
+
 const setupRoutes = require("../routes/index.ts");
+import { Request, Response} from "express"
+import express from 'express'
 
 module.exports = () => {
    const app = express();
 
    app.use(express.json());
    setupRoutes(app);
-   app.get("/", (_req, res) => {
+   app.get("/", (req: Request, res: Response) => {
       res.send("landing page");
    });
 

@@ -1,6 +1,8 @@
 const argon2 = require("argon2");
+import { Request, Response, NextFunction} from "express"
 
-module.exports = async (req, res, next) => {
+
+module.exports = async (req: Request, res: Response, next: NextFunction) => {
    const { name, password } = req.body.user;
    if (!name || !password) return res.json("Empty user details");
    try {

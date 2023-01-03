@@ -1,7 +1,8 @@
 const jwt = require("jsonwebtoken");
+import { Request, Response, NextFunction} from "express"
 
-module.exports = (req, res, next) => {
-   const headers = req?.get("Authorization").split("Bearer ").pop();
+module.exports = (req: Request, res: Response, next: NextFunction) => {
+   const headers = req?.get("Authorization")?.split("Bearer ").pop();
    if (!headers) return res.json("No auth");
    try {
       const veredict = jwt.verify(headers, process.env.JWT_SECRET);
