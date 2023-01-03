@@ -8,6 +8,6 @@ module.exports = (req, res, next) => {
       if (!veredict) return res.json("Bad authorizacion");
       return next();
    } catch (err) {
-      res.json(err.message);
+      if(err instanceof Error) res.json(err.message);
    }
 };

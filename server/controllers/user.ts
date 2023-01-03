@@ -1,6 +1,4 @@
 const userModel = require("../models/user");
-const jwt = require("jsonwebtoken");
-const argon2 = require("argon2");
 
 module.exports = {
    create: async function createUser(req, res) {
@@ -9,6 +7,8 @@ module.exports = {
       res.json(response);
    },
    signin: async function (req, res) {
+      const jwt = require("jsonwebtoken");
+      const argon2 = require("argon2");
       const { name, password } = req.body.user;
       const dbUser = await userModel.findOne({ name });
 

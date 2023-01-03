@@ -1,11 +1,12 @@
 const express = require("express");
-const setupRoutes = require("../routes/index.js");
+const setupRoutes = require("../routes/index.ts");
+
 module.exports = () => {
    const app = express();
 
    app.use(express.json());
    setupRoutes(app);
-   app.get("/", (req, res) => {
+   app.get("/", (_req, res) => {
       res.send("landing page");
    });
 
