@@ -1,27 +1,29 @@
-const userModel = require("../models/user");
+
+const userServices = require("../services/user")
+
 import { Request, Response} from "express"
 
 module.exports = {
    create: async function createUser(req: Request, res: Response) {
       if(!req.body) return
       const user = req.body.user;
-      const response = await userModel.create(user);
-      res.json(response);
-      res
+      try {
+         const response = await userServices.create(user)
+         res.json(response);
+         
+      } catch (error) {
+         if(error instanceof Error) res.json(error.message)
+      }
    },
    signin: async function (req: Request, res: Response) {
-      const jwt = require("jsonwebtoken");
-      const argon2 = require("argon2");
+     
       if(!req.body) return
       const { name, password } = req.body.user;
-      const dbUser = await userModel.findOne({ name });
-
-      const veredict = await argon2.verify(dbUser.password, password);
-      if (!veredict) return res.json("Bad credentials");
-      let token = jwt.sign({ foo: "bar" }, process.env.JWT_SECRET);
+      const token = await userServices.signin(name, password)
+      if(!token) return res.json("Authentication failed")
       return res.json(token);
    },
    something: (req: Request, res: Response) => {
-      res.json("We did something");
+      res.json(userServices.something());
    },
 };

@@ -1,5 +1,5 @@
-const connectDB = require("./server/loaders/mongoose");
-const expressInit = require("./server/loaders/express");
+import connectDB from "./server/loaders/mongoose"
+import expressInit from "./server/loaders/express";
 
 require("dotenv").config();
 

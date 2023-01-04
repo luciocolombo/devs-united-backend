@@ -3,7 +3,7 @@ const setupRoutes = require("../routes/index.ts");
 import { Request, Response} from "express"
 import express from 'express'
 
-module.exports = () => {
+export default () => {
    const app = express();
 
    app.use(express.json());
