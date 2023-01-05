@@ -1,12 +1,13 @@
-
 const setupRoutes = require("../routes/index.ts");
-import { Request, Response} from "express"
-import express from 'express'
+import { Request, Response } from "express";
+import express from "express";
 
 export default () => {
    const app = express();
+   const cors = require("cors");
 
    app.use(express.json());
+   app.use(cors());
    setupRoutes(app);
    app.get("/", (req: Request, res: Response) => {
       res.send("landing page");
